@@ -4,5 +4,7 @@
 
 export default {
     props:[''],
-    
+    components:{
+
+    },
 }

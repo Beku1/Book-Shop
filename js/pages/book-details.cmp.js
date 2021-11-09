@@ -25,7 +25,7 @@ export default {
             <div class="book-language">language: {{book.language}}</div>
         <div  class="book-price">Price: <span :class="priceColor">{{showPrice}} </span><span class="small-price"> {{showSale}} </span></div>
         <book-desc v-bind:desc="book.description"></book-desc>
-         <add-review :book="book"/>
+         <add-review :book="book" />
         </div>
 </section>
     `,
