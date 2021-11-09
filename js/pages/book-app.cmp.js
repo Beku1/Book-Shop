@@ -2,6 +2,7 @@ import {bookService} from '../services/book-service.js'
 import bookFilter from '../cmps/book-filter.cmp.js'
 import bookList from '../cmps/book-list.cmp.js'
 import bookDetails from '../pages/book-details.cmp.js'
+import bookAdd from '../cmps/book-add.cmp.js'
 
 
 
@@ -9,18 +10,25 @@ export default {
     components:{
     bookFilter,
     bookList,
-    bookDetails
+    bookDetails,
+    bookAdd
     },
     template:`
       <section class="book-app">
+          <div class="filter-and-modal">
           <book-filter v-if="!selectedBook" @filtered="setFilter" />
+         <button @click="openNewModal"  >Add Books</button>
+</div>
           <book-list  v-if="!selectedBook" :books="booksToShow" @selected="selectBook" />
+           
+          <book-add v-show="isModalOpen" @close="closeModal" @addedBook="loadBooks" />
               <!-- <book-details v-if="selectedBook" :book="selectedBook" @close="closeDetails" />  -->
               <router-link to="/book/"></router-link>
       </section>
     `,
     data(){
         return {
+            isModalOpen:false,
         books:null,
         filterBy:null,
         selectedBook:null,
@@ -33,6 +41,12 @@ export default {
 
     },
     methods:{  
+        closeModal(){
+            this.isModalOpen = false
+        },
+        openNewModal(){
+            this.isModalOpen = true
+        },
     loadBooks(){
        bookService.query()
        .then(books=> {
@@ -64,6 +78,9 @@ export default {
         })
         return booksToShow
     },
+    addedBooks(){
+
+    }
   
     }
 

@@ -1,6 +1,11 @@
-
+import bookAdd from './book-add.cmp.js'
 
 export default{
+    components:{
+         bookAdd
+        },
+   
+
    template:`
    <section class="book-filter">
        <form class="filter-form">
@@ -9,10 +14,13 @@ export default{
        <label>Price To:<input  v-model.number="filterBy.priceTo" type="number" id="price-to" min="1" max="200"></label>
        <button @click.prevent="filter()">Search</button>
     </form>  
+   
+    
 </section>
    `,
 data(){
   return {
+      
       filterBy:{
           title:'',
           priceStart:0,
@@ -25,6 +33,10 @@ data(){
     filter(){
 
         this.$emit('filtered',{...this.filterBy})
-    }
+    },
+    openNewModal(){
+     this.isModalOpen = true
+    },
+    
 }
 }

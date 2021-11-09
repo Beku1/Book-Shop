@@ -6,7 +6,7 @@ export default {
    <section class="book-preview">
        <img :src="book.thumbnail"/>
        <div v-if="book.listPrice.isOnSale" class="on-sale">{{showOnSale}}</div>
-       <p>Title:  {{book.title}}</p>
+       <p>Title:  {{showTitle}}</p>
        <p><span>Price: {{book.listPrice.amount}}</span> <span>{{currencyIcon}}</span></p>
 </section>
   `,
@@ -21,6 +21,10 @@ export default {
         },
         showOnSale(){
             return this.book.listPrice.isOnSale ? 'SALE!!!' : ''
+        },
+        showTitle(){
+          if(this.book.title.length>40) return this.book.title.substring(0,37) + '...'
+          return this.book.title
         }
   }
 }

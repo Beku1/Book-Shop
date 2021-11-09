@@ -1,7 +1,8 @@
-export default {
+export default{
     props:['desc'],
     template:`
-    <div class="book-description">Description: {{showText}}<button v-if="!isShortDesc" @click="toggleDesc">{{buttonText}}</button></div>
+    <div>
+    <div class="book-description">Description: {{showText}}<button v-if="!isShortDesc" @click="toggleDesc">{{buttonText}}</button></div></div>
     `,
     data(){
       return {

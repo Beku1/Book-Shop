@@ -11,12 +11,18 @@ export default {
     },
     template:`
     <section class="book-details-container ">
+        <div class="nextBook">
+        <router-link  :to="'/book/'+nextBookId">Next</router-link>
+        </div>
+        <div class="prevBook">
+        <router-link  :to="'/book/'+prevBookId">Prev</router-link>
+</div>
     <div class="book-details" v-if="book">
         <button class="close-book" @click="closeDetails">X</button>
         <div class="small-price">{{showSale}}</div>
         <img :src="book.thumbnail"/>
         <div class="book-title">Title: {{book.title}}</div>
-        <div class="book-subtitle">Subtitle: {{book.subtitle}}</div>
+        <div class="book-subtitle"> Subtitle: {{book.subtitle}}</div>
         <div class="book-authors">Authors:{{showAuthors}}</div>
         <div class="book-published">Published At: {{book.publishedDate}}  <span>{{publishedDate}}</span> </div>
        
@@ -31,7 +37,9 @@ export default {
     `,
     data(){
         return{
-         book:null
+         book:null,
+         nextBookId:null,
+         prevBookId:null
         }
     },
     created(){
@@ -45,6 +53,7 @@ export default {
     },
     methods:{
      closeDetails(){
+         console.log(this.nextBookId,this.PrevBookId)
         this.$router.push('/book')
      }
     },
@@ -90,11 +99,30 @@ export default {
         },
         priceColor(){
             return {'big-price': this.book.listPrice.amount > 150 , 'small-price': this.book.listPrice.amount < 20}
+        },
+    },
+        watch:{
+            '$route.params.bookId':{
+                handler(){
+                    const { bookId } = this.$route.params
+                    console.log(bookId)
+                    bookService.getById(bookId)
+                    .then(book => this.book = book)
+                    bookService.getNextPrevId(bookId)
+                    .then(bookIds =>{
+                        console.log(bookIds)
+                        this.nextBookId = bookIds.nextId
+                        this.prevBookId = bookIds.prevId
+                        console.log( this.nextBookId, this.prevBookId)
+                    })
+                },
+                immediate:true
+            }
         }
 
 
 
 
     }
-}
+
 
