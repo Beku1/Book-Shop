@@ -15,10 +15,10 @@ const options = {
     },
     template:`
     <section>
-        <user-msg/>
-     <app-header/>
-     <router-view/>
-     <app-footer />
+        <user-msg></user-msg>
+     <app-header></app-header>
+     <router-view></router-view>
+     <app-footer ></app-footer >
     </section>
     `,
     
