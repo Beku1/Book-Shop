@@ -23,7 +23,7 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-image: url('/img/header-background.jpg');
+    background-image: url('./img/header-background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -115,7 +115,7 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-background-image: url('/img/about-background.jpg');
+background-image: url('./img/about-background.jpg');
 background-repeat: no-repeat;
 background-size: cover;
 
